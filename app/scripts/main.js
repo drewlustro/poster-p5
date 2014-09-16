@@ -1,8 +1,8 @@
 var xspacing = 10;    // Distance between each horizontal location
 var w;                // Width of entire wave
 var theta = 0.0;      // Start angle at 0
-var amplitude = 120.0; // Height of wave
-var period = 3000.0;   // How many pixels before the wave repeats
+var amplitude = 220.0; // Height of wave
+var period = 500.0;   // How many pixels before the wave repeats
 var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
 var numWaves = 4;
@@ -22,8 +22,10 @@ function setup() {
 
 function draw() {
   now = millis();
-  background(10, 20, 150);
-  background(50);
+  // background(36, 198, 220); // teal
+  // background(255);
+  background(45);
+  // background(0);
   // renderOutlineBall();
   fill();
   noStroke();
@@ -35,19 +37,19 @@ function draw() {
     waveOffset = (TWO_PI / numWaves) * i;
     waveAmp = (PI / numWaves) * i;
     renderWave(waveOffset, timeDiffNormal(
-               timeDiffNormal(4000) * 500 + 2200) + 0.5);
+               timeDiffNormal(4000) * 500 + 2200) - 0.2);
   }
   // renderOutline();
 
 }
 
 function timeDiff(speed) {
-  speed = speed || 1000;
+  speed = speed || 2000;
   return now / speed;
 }
 
 function timeDiffNormal(speed) {
-  speed = speed || 1000;
+  speed = speed || 2000;
   return (cos(timeDiff(speed)) + 1.00001) / 2;
 }
 
@@ -106,17 +108,18 @@ function renderWave(offset, amp) {
   angle = TWO_PI / yvalues.length;
   // A simple way to draw the wave with an ellipse at each location
   ylen = yvalues.length;
-  colorMode(HSB, 100, ylen, ylen, angle);
+  colorMode(HSB, ylen, ylen, ylen, angle);
   blendMode(OVERLAY);
   for (var x = 0; x < yvalues.length; x++) {
-    fill(55 + timeDiffNormal() * 10, ylen, x, angle);
+    fill(25 + timeDiffNormal(600) * x, ylen, x, angle / 1.5);
+    // fill(x, ylen, x, angle);
     ampTotal = (amp * (ringRadius + yvalues[x]));
     a = cos(x * angle + offset) * ampTotal + halfWidth;
     b = sin(x * angle + offset) * ampTotal + halfHeight;
     // ellipse(x * xspacing, height/2 + yvalues[x], 16, 16);
     ellipse(a, b, x / 2 + 6, x / 2 + 6);
   }
-  blendMode(BLEND);
+
   colorMode(RGB);
 }
 
