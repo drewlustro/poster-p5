@@ -25,7 +25,7 @@ function draw() {
   // background(36, 198, 220); // teal
   // background(230);
   // background(255);
-  background(45);
+  background(0);
   // background(0);
   // renderOutlineBall();
   fill();
@@ -110,9 +110,9 @@ function renderWave(offset, amp) {
   // A simple way to draw the wave with an ellipse at each location
   ylen = yvalues.length;
   colorMode(HSB, ylen, ylen, ylen, angle);
-  blendMode(DODGE);
+  blendMode(REPLACE);
   for (var x = 0; x < yvalues.length; x++) {
-    fill(25 + timeDiffNormal(800) * x, ylen, x, angle / 1.5);
+    fill(25 + timeDiffNormal(800) * x, 0, x, angle / 1.5);
     // fill(x, ylen, x, angle);
     ampTotal = (amp * (ringRadius + yvalues[x]));
     a = cos(x * angle + offset) * ampTotal + halfWidth;
