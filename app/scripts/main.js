@@ -1,11 +1,13 @@
-var xspacing = 10;    // Distance between each horizontal location
+var xspacing = 8;    // Distance between each horizontal location
 var w;                // Width of entire wave
 var theta = 0.0;      // Start angle at 0
+// var amplitude = 220.0; // Height of wave
+// var period = 500.0;   // How many pixels before the wave repeats
 var amplitude = 220.0; // Height of wave
-var period = 500.0;   // How many pixels before the wave repeats
+var period = 1000.0;   // How many pixels before the wave repeats
 var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
-var numWaves = 4;
+var numWaves = 3;
 
 var canvasWidth = canvasHeight = 1000;
 var halfWidth = canvasWidth / 2;
@@ -24,8 +26,8 @@ function draw() {
   now = millis();
   // background(36, 198, 220); // teal
   // background(230);
-  // background(255);
-  background(0);
+  background(255);
+  // background(0);
   // background(0);
   // renderOutlineBall();
   fill();
@@ -38,7 +40,7 @@ function draw() {
     waveOffset = (TWO_PI / numWaves) * i;
     waveAmp = (PI / numWaves) * i;
     renderWave(waveOffset, timeDiffNormal(
-               timeDiffNormal(4000) * 500 + 2200) - 0.2);
+               timeDiffNormal(8000) * 500 + 2200) - 0.1);
   }
   // renderOutline();
 
@@ -110,9 +112,10 @@ function renderWave(offset, amp) {
   // A simple way to draw the wave with an ellipse at each location
   ylen = yvalues.length;
   colorMode(HSB, ylen, ylen, ylen, angle);
-  blendMode(REPLACE);
+  blendMode(DIFFERENCE);
   for (var x = 0; x < yvalues.length; x++) {
-    fill(25 + timeDiffNormal(800) * x, 0, x, angle / 1.5);
+    // fill(25 + timeDiffNormal(800) * x, 0, x / 2 + (ylen / 2), angle / 1.5);
+    fill((x+1)/2 + ylen/2, 0, 25 + timeDiffNormal(800) * x, angle * 2);
     // fill(x, ylen, x, angle);
     ampTotal = (amp * (ringRadius + yvalues[x]));
     a = cos(x * angle + offset) * ampTotal + halfWidth;
