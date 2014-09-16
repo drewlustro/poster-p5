@@ -1,13 +1,13 @@
-var xspacing = 8;    // Distance between each horizontal location
+var xspacing = 16;    // Distance between each horizontal location
 var w;                // Width of entire wave
 var theta = 0.0;      // Start angle at 0
 // var amplitude = 220.0; // Height of wave
 // var period = 500.0;   // How many pixels before the wave repeats
-var amplitude = 220.0; // Height of wave
-var period = 1000.0;   // How many pixels before the wave repeats
+var amplitude = 420.0; // Height of wave
+var period = 680.0;   // How many pixels before the wave repeats
 var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
-var numWaves = 3;
+var numWaves = 4;
 
 var canvasWidth = canvasHeight = 1000;
 var halfWidth = canvasWidth / 2;
@@ -40,7 +40,7 @@ function draw() {
     waveOffset = (TWO_PI / numWaves) * i;
     waveAmp = (PI / numWaves) * i;
     renderWave(waveOffset, timeDiffNormal(
-               timeDiffNormal(8000) * 500 + 2200) - 0.1);
+               timeDiffNormal(4000) * 500 + 2200) - 0.06);
   }
   // renderOutline();
 
@@ -105,6 +105,11 @@ function calcWave() {
 function renderWave(offset, amp) {
   offset = offset || 0;
   amp = amp || 1;
+  if (amp < 0.5) {
+    amp = 0.5;
+  } else if (amp > 2) {
+    amp = 2;
+  }
   noStroke();
 
   var a, b, angle, ampTotal, ylen;
@@ -115,13 +120,13 @@ function renderWave(offset, amp) {
   blendMode(DIFFERENCE);
   for (var x = 0; x < yvalues.length; x++) {
     // fill(25 + timeDiffNormal(800) * x, 0, x / 2 + (ylen / 2), angle / 1.5);
-    fill((x+1)/2 + ylen/2, 0, 25 + timeDiffNormal(800) * x, angle * 2);
+    fill((x+1)/2 + ylen/2, 0, 25 + timeDiffNormal(800) * x, angle/2 + angle/2);
     // fill(x, ylen, x, angle);
-    ampTotal = (amp * (ringRadius + yvalues[x]));
+    ampTotal = (amp * (ringRadius/3 + yvalues[x]));
     a = cos(x * angle + offset) * ampTotal + halfWidth;
     b = sin(x * angle + offset) * ampTotal + halfHeight;
     // ellipse(x * xspacing, height/2 + yvalues[x], 16, 16);
-    ellipse(a, b, x / 2 + 6, x / 2 + 6);
+    ellipse(a, b, x / 3 + 24, x / 3 + 24);
   }
 
   colorMode(RGB);
