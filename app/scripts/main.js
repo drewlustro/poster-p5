@@ -109,7 +109,7 @@ function renderWave(offset, amp) {
   // A simple way to draw the wave with an ellipse at each location
   ylen = yvalues.length;
   colorMode(HSB, ylen, ylen, ylen, angle);
-  blendMode(OVERLAY);
+  blendMode(SCREEN);
   for (var x = 0; x < yvalues.length; x++) {
     fill(25 + timeDiffNormal(600) * x, ylen, x, angle / 1.5);
     // fill(x, ylen, x, angle);
