@@ -23,6 +23,7 @@ function setup() {
 function draw() {
   now = millis();
   // background(36, 198, 220); // teal
+  // background(230);
   // background(255);
   background(45);
   // background(0);
@@ -69,7 +70,7 @@ function renderOutlineBall() {
   var tx = timeDiff(4000);
   ballSize = timeDiffNormal(850) * 400 + 1000;
   noStroke();
-  fill(255, 255, 255, timeDiffNormal(20000) * 200 + 50);
+  fill(255, 255, 255, timeDiffNormal(20000) * 100 + 50);
 
   x = cos(tx) * ballSize/2 + halfWidth;
   y = sin(tx) * ballSize/2 + halfHeight;
@@ -79,9 +80,9 @@ function renderOutlineBall() {
   // y = sin(tx) * ballSize/2 + halfHeight;
   // ellipse(x, y, ballSize, ballSize);
 
-  // x = cos(tx) * ballSize/2 + halfWidth;
-  // y = sin(-tx) * ballSize/2 + halfHeight;
-  // ellipse(x, y, ballSize, ballSize);
+  x = cos(tx) * ballSize/2 + halfWidth;
+  y = sin(-tx) * ballSize/2 + halfHeight;
+  ellipse(x, y, ballSize, ballSize);
 
 
 }
@@ -109,9 +110,9 @@ function renderWave(offset, amp) {
   // A simple way to draw the wave with an ellipse at each location
   ylen = yvalues.length;
   colorMode(HSB, ylen, ylen, ylen, angle);
-  blendMode(SCREEN);
+  blendMode(DODGE);
   for (var x = 0; x < yvalues.length; x++) {
-    fill(25 + timeDiffNormal(600) * x, ylen, x, angle / 1.5);
+    fill(25 + timeDiffNormal(800) * x, ylen, x, angle / 1.5);
     // fill(x, ylen, x, angle);
     ampTotal = (amp * (ringRadius + yvalues[x]));
     a = cos(x * angle + offset) * ampTotal + halfWidth;
