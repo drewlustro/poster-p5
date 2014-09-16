@@ -1,8 +1,8 @@
 var xspacing = 10;    // Distance between each horizontal location
 var w;                // Width of entire wave
 var theta = 0.0;      // Start angle at 0
-var amplitude = 100.0; // Height of wave
-var period = 280.0;   // How many pixels before the wave repeats
+var amplitude = 120.0; // Height of wave
+var period = 3000.0;   // How many pixels before the wave repeats
 var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
 var numWaves = 4;
@@ -22,7 +22,7 @@ function setup() {
 
 function draw() {
   now = millis();
-  // background(10, 20, 150);
+  background(10, 20, 150);
   background(50);
   // renderOutlineBall();
   fill();
@@ -107,7 +107,7 @@ function renderWave(offset, amp) {
   // A simple way to draw the wave with an ellipse at each location
   ylen = yvalues.length;
   colorMode(HSB, 100, ylen, ylen, angle);
-  blendMode(SCREEN);
+  blendMode(OVERLAY);
   for (var x = 0; x < yvalues.length; x++) {
     fill(55 + timeDiffNormal() * 10, ylen, x, angle);
     ampTotal = (amp * (ringRadius + yvalues[x]));
