@@ -122,8 +122,9 @@ function draw() {
   for (var i = 0; i < wvs.numWaves; i++) {
     waveOffset = (TWO_PI / wvs.numWaves) * i;
     waveAmp = (PI / wvs.numWaves) * i;
-    renderWave(waveOffset, timeDiffNormal(
-               timeDiffNormal(4000) * 500 + 2200) - 0.06);
+    renderWave(waveOffset);
+    // renderWave(waveOffset, timeDiffNormal(
+               // timeDiffNormal(4000) * 500 + 2200) - 0.06);
   }
   // renderOutline();
 
